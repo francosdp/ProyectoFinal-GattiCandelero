@@ -5,13 +5,14 @@ const NavBar = () => {
     return (
         <header>
             <Link>
-                <h1>Big Shop</h1>
+                <h1>
+                    <NavLink to='/' >
+                        Big Shop
+                    </NavLink>
+                </h1>
             </Link>
             <nav>
                 <ul>
-                    <li>
-                        <NavLink to='/'>Importados</NavLink>
-                    </li>
                     <li>
                         <NavLink to='/categoria/personal'>Personal</NavLink>
                     </li>

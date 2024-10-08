@@ -1,9 +1,28 @@
-.productContainer{
-    text-align: center;
-    border: 1px solid black;
-    margin: 4rem;
+.productContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    margin: 15px;
 }
 
-.productContainer img{
-    width: 35vw;
+.productInfoContainer {
+    width: 600px;
+    margin-left: 20px;
+    padding-left: 15px;
+}
+
+.productInfoContainer h2 {
+    text-align: center;
+}
+
+.productInfoContainer p {
+
+    margin-left: 15px;
+
+}
+
+.productContainer img {
+    width: 450px;
+    height: 450px;
 }

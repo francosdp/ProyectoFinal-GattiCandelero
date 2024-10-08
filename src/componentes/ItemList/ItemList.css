@@ -1,0 +1,4 @@
+.ItemList {
+    display: flex;
+    flex-wrap: wrap;
+}

@@ -1,0 +1,19 @@
+header{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(105, 233, 226);
+
+}
+nav{
+background-color: rgba(119, 241, 125, 0.842);
+width:40%;
+}
+ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+li{
+    padding: 5px;
+    margin: 15px;
+}

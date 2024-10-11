@@ -8,6 +8,7 @@ import { CarritoProvider } from './context/carritoContext'
 import Cart from './componentes/Cart/Cart'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+// import Productos from './componentes/Productos/Productos'
 
 
 
@@ -20,6 +21,7 @@ function App() {
       <BrowserRouter>
         <CarritoProvider>
           <NavBar />
+          {/* <Productos/> */}
           <Routes>
             <Route path='/' element={<ItemListContainer />} />
             <Route path='/categoria/:idCategoria' element={<ItemListContainer />} />

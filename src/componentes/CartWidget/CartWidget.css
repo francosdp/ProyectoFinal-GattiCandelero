@@ -1,6 +1,12 @@
+
 .CartImg{
     height: 70px;
     width: 70px;
     position: absolute;
     right: 10% ;
+}
+.cantidadTotal{
+    position: absolute;
+    right:8%;
+    top: 8%;
 }

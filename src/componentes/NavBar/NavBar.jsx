@@ -14,10 +14,13 @@ const NavBar = () => {
             <nav>
                 <ul>
                     <li>
-                        <NavLink to='/categoria/personal'>Personal</NavLink>
+                        <NavLink to='/categoria/personal'> Personal</NavLink>
                     </li>
                     <li>
                         <NavLink to='/categoria/domestico'> Domestico</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/formulario'> Contacto</NavLink>
                     </li>
                 </ul>
             </nav>

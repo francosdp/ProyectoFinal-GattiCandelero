@@ -24,7 +24,7 @@ const Cart = () => {
     return (
         <div>
             {
-                carrito.map(producto=><CartItem key={producto.id} {...producto}/>)
+                carrito.map(prod=><CartItem key={prod.producto.id} {...prod}/>)
             }
             <h3>Total: ${total}</h3>
             <h3>Cantidad Total: {cantidadTotal}</h3>

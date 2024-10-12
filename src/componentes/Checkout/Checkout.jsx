@@ -1,3 +1,5 @@
+
+
 import { useState, useContext } from "react"
 import { CarritoContext } from "../../context/CarritoContext"
 import { db } from "../../service/config"
@@ -49,40 +51,33 @@ const Checkout = () => {
 
     Promise.all(
       orden.items.map(async (productoOrden) => {
-        const productoRef = doc(db, "gigastock", productoOrden.id)
-
-        const productoDoc = await getDoc(productoRef)
-        const stockActual = productoDoc.data().stock
-
+        const productoRef = doc(db, "gigastock", productoOrden.id);
+        const productoDoc = await getDoc(productoRef);
+        const stockActual = productoDoc.data().stock;
+    
         await updateDoc(productoRef, {
           stock: stockActual - productoOrden.cantidad
-        })
+        });
       })
     )
       .then(() => {
         addDoc(collection(db, "ordenes"), orden)
           .then(docRef => {
-            setOrdenId(docRef.id)
-            compraFinalizada()
-            setNombre("")
-            setApellido("")
-            setDireccion("")
-            setEmail("")
-            setTelefono("")
-
+            setOrdenId(docRef.id);
+            compraFinalizada();
+            setNombre("");
+            setApellido("");
+            setDireccion("");
+            setEmail("");
+            setTelefono("");
           })
-
           .catch(error => {
-            console.log("Error al crear la orden", error)
-            setError("Se produjo un error al crear la orden")
-          })
-
+            setError("Se produjo un error al crear la orden");
+          });
       })
-      .catch((error)=>{
-        console.log("No se pudo actualizar el stock",error)
-        setError("No se puede actualizar el stock")
-      })
-
+      .catch((error) => {
+        setError("No se puede actualizar el stock");
+      });
 
 
   }

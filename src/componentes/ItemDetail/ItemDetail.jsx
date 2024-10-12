@@ -1,7 +1,7 @@
 import './ItemDetail.css';
 import ItemCount from "../ItemCount/ItemCount";
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { CarritoContext } from '../../context/carritoContext';
 import { useContext } from 'react';
 import { toast } from 'react-toastify';
@@ -38,6 +38,9 @@ const ItemDetail = ({ id, nombre, precio, img, details, stock }) => {
                 {
                     agregarCantidad > 0 ? (<Link to="/cart">Terminar Compra</Link>) : (<ItemCount inicial={1} stock={stock} agregarCompra={manejadorCantidad} />)
                 }
+                <NavLink to='/'>
+                <h4>Volver a la tienda</h4>
+                </NavLink>
 
 
 

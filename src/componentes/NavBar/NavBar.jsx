@@ -3,7 +3,7 @@ import CartWidget from '../CartWidget/CartWidget'
 import {NavLink } from 'react-router-dom'
 const NavBar = () => {
     return (
-        <header>
+        <header className='background'>
 
             <h1>
                 <NavLink to='/' >

@@ -7,6 +7,7 @@ import { db } from '../../service/config'
 
 
 
+
 const ItemListContainer = () => {
     const [productos, setProductos] = useState([])
 
@@ -23,10 +24,8 @@ const ItemListContainer = () => {
                 })
                 setProductos(nuevosProductos)
             })
-            .catch(error => console.log(error))
-            .finally(() => {
-                console.log("Proceso Finalizado")
-            })
+            .catch()
+            .finally()
     }, [idCategoria])
 
 
@@ -39,3 +38,8 @@ const ItemListContainer = () => {
 }
 
 export default ItemListContainer
+
+
+
+
+

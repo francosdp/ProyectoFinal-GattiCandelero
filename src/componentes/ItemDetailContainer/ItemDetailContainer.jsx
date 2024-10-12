@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"
-// import { callProduct } from "../../asyncmock"
 import ItemDetail from "../ItemDetail/ItemDetail"
 import { useParams } from "react-router-dom"
 import { db } from "../../service/config"

@@ -9,6 +9,7 @@ import Cart from './componentes/Cart/Cart';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Checkout from './componentes/Checkout/Checkout';
+import ErrorPage from './componentes/ErrorPage/ErrorPage';
 // import Productos from './componentes/Productos/Productos'
 
 
@@ -18,7 +19,7 @@ import Checkout from './componentes/Checkout/Checkout';
 function App() {
 
   return (
-    <>
+    <div className='app-body'>
       <BrowserRouter>
         <CarritoProvider>
           <NavBar />
@@ -30,13 +31,13 @@ function App() {
             <Route path='/cart' element={<Cart />} />
             <Route path='/checkout' element={<Checkout />} />
             <Route path='/formulario' element={<Formulario />} />
-            <Route path='*' element={<h2>Esta seccion aun no se encuentra disponible</h2>} />
+            <Route path='*' element={<ErrorPage/>} />
           </Routes>
         </CarritoProvider>
         <ToastContainer/>
       </BrowserRouter>
 
-    </>
+    </div>
   )
 }
 

@@ -7,7 +7,7 @@ useEffect(()=>{
     fetch (url)
     .then (respuesta => respuesta.json())
     .then (jsonData=> setData(jsonData))
-    .catch (error=> console.log(error))
+    .catch (error=>(error))
 },[url])
 return data
 }

@@ -1,8 +1,6 @@
 import { useState } from "react"
 import { useEffect } from "react"
-// import { getProducts } from "../../asyncmock"
 import ItemList from "../ItemList/ItemList"
-// import { getProductsCategory } from "../../asyncmock"
 import { useParams } from "react-router-dom"
 import { collection, getDocs, query, where } from 'firebase/firestore'
 import { db } from '../../service/config'

@@ -19,7 +19,7 @@ const ItemDetailContainer = () => {
                 const nuevoProducto = { id: respuesta.id,...data }
                 setProducto(nuevoProducto)
             })
-            .catch(console.log ("Error en ItemDetailContainer"))
+            .catch(error => error ("Error en ItemDetailContainer"))
 
     }, [idItem])
 
@@ -32,3 +32,4 @@ const ItemDetailContainer = () => {
 }
 
 export default ItemDetailContainer
+

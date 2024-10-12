@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { db } from '../../service/config'
+import { collection, addDoc } from "firebase/firestore"
 
 
 const Formulario = () => {
@@ -10,11 +12,15 @@ const Formulario = () => {
     const [email, setEmail] = useState("")
     const manejadorFormulario = (e) => {
         e.preventDefault()
-        const nuevoCliente = { nombre, apellido, email }
+
+        addDoc(collection(db, "nuevoCliente"), {
+            nombre: nombre,
+            apellido: apellido,
+            email: email,
+        });
         setNombre("")
         setApellido("")
         setEmail("")
-        console.log(nuevoCliente)
     }
 
 

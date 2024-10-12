@@ -62,8 +62,13 @@ export const CarritoProvider = ({ children }) => {
                     text: "Tu carrio ha sido vaciado",
                     icon: "success"
                 });
+                setCarrito([])
+                setCantidadTotal(0)
+                setTotal(0)
             }
         });
+    }
+    const compraFinalizada = () => {
         setCarrito([])
         setCantidadTotal(0)
         setTotal(0)
@@ -105,7 +110,7 @@ export const CarritoProvider = ({ children }) => {
         ;
 
     return (
-        <CarritoContext.Provider value={{ carrito, total, cantidadTotal, agregarAlCarrito, eliminarProducto, vaciarCarrito, sumarProducto, restarProducto }}>
+        <CarritoContext.Provider value={{ carrito, total, cantidadTotal, agregarAlCarrito, eliminarProducto, vaciarCarrito, compraFinalizada, sumarProducto, restarProducto }}>
             {children}
         </CarritoContext.Provider>
     );

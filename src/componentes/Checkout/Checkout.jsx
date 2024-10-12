@@ -1,7 +1,7 @@
 import { useState, useContext } from "react"
 import { CarritoContext } from "../../context/CarritoContext"
 import { db } from "../../service/config"
-import { collection, addDoc } from "firebase/firestore"
+import { collection, addDoc, updateDoc, doc, getDoc } from "firebase/firestore"
 
 
 
@@ -18,7 +18,7 @@ const Checkout = () => {
   const [ordenId, setOrdenId] = useState("")
 
 
-  const { carrito, vaciarCarrito, total } = useContext(CarritoContext)
+  const { carrito, compraFinalizada, total } = useContext(CarritoContext)
 
   const manejadorFormulario = (e) => {
     e.preventDefault()
@@ -32,27 +32,57 @@ const Checkout = () => {
 
     const orden = {
       items: carrito.map(prod => ({
-        id: prod.id,
-        nombre: prod.nombre,
+        id: prod.producto.id,
+        nombre: prod.producto.nombre,
         cantidad: prod.cantidad
       })),
       total: total,
       fecha: new Date(),
-      nombre: { nombre },
-      apellido: { apellido },
-      telefono: { telefono },
-      email: { email },
+      nombre,
+      apellido,
+      telefono,
+      email
     }
 
-    addDoc(collection(db, "ordenes"),orden)
-      .then(docRef => {
-        setOrdenId(docRef.id)
-        vaciarCarrito()
+
+
+
+    Promise.all(
+      orden.items.map(async (productoOrden) => {
+        const productoRef = doc(db, "gigastock", productoOrden.id)
+
+        const productoDoc = await getDoc(productoRef)
+        const stockActual = productoDoc.data().stock
+
+        await updateDoc(productoRef, {
+          stock: stockActual - productoOrden.cantidad
+        })
       })
-      .catch(error => {
-        console.log("Error al crear la orden", error)
-        setError("Se produjo un error al crear la orden")
+    )
+      .then(() => {
+        addDoc(collection(db, "ordenes"), orden)
+          .then(docRef => {
+            setOrdenId(docRef.id)
+            compraFinalizada()
+            setNombre("")
+            setApellido("")
+            setDireccion("")
+            setEmail("")
+            setTelefono("")
+
+          })
+
+          .catch(error => {
+            console.log("Error al crear la orden", error)
+            setError("Se produjo un error al crear la orden")
+          })
+
       })
+      .catch((error)=>{
+        console.log("No se pudo actualizar el stock",error)
+        setError("No se puede actualizar el stock")
+      })
+
 
 
   }
@@ -92,7 +122,7 @@ const Checkout = () => {
         <button type="submit">Confirmar Compra</button>
         {
           ordenId && (
-            <strong>Gracias por tu compra {nombre} <br />Tu numero de orden es: {ordenId} </strong>
+            <strong>¡Gracias por tu compra!<br />Tu numero de orden es: {ordenId} </strong>
           )
         }
       </form>

@@ -2,6 +2,20 @@ import { readFile } from 'fs';
 import fs from 'fs/promises'
 import path from 'path'
 
+import mongoose from 'mongoose';
+
+const DBPath = 'mongodb+srv://Franco:fransdp.atlas@cluster0.ei50y.mongodb.net/EntregaFinal?retryWrites=true&w=majority&appName=Cluster0'
+
+async function conectDataBase() {
+    try{
+
+    }catch(error){
+        
+    }
+    
+} 
+
+
 
 const productFilePath = path.resolve('data', 'productos.json')
 

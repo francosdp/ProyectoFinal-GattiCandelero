@@ -7,11 +7,31 @@ import __dirname from './utils.js'
 import { Server } from 'socket.io'
 import ProductManager from './services/ProductManager.js'
 
+import mongoose from 'mongoose'
+
 
 const app = express();
 const PORT = 8080
 
-const httpServer = app.listen(PORT, () => { console.log('Servidor corriendo en ' + PORT) });
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+const DBPath = 'mongodb+srv://Franco:fransdp.atlas@cluster0.ei50y.mongodb.net/EntregaFinal?retryWrites=true&w=majority&appName=Cluster0'
+
+const connetcMongoDB = async () => {
+    try {
+        await mongoose.connect(DBPath)
+        console.log("Conectado a MongoDB")
+    } catch (error) {
+        console.log("Error al conectar")
+    }
+}
+connetcMongoDB()
+
+
+
+const httpServer = app.listen(PORT, () => { console.log('Servidor socket.io corriendo en ' + PORT) });
 const socketServer = new Server(httpServer)
 
 

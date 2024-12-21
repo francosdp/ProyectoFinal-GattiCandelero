@@ -2,28 +2,23 @@ import express from 'express'
 import fs from 'fs/promises'
 import path from 'path'
 import ProductManager from '../services/ProductManager.js'
+import { productModel } from '../models/product.Model.js'
 
 let products = []
 
-async function readJson() {
-    try {
-        const productFilePath = path.resolve('data', 'productos.json')
-        const data = await fs.readFile(productFilePath, 'utf8');
-        products = JSON.parse(data);
-
-    } catch (error) {
-        console.error(error);
-    }
-
+async function productsInDB() {
+    productsInDB = await productModel.find()
+    products = productsInDB.map(product=> product.toObject())
+    return products
 }
+productsInDB()
 
-readJson();
 
 const router = express.Router()
 const productManager = new ProductManager()
 
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     res.render('home', { products })
 })
 

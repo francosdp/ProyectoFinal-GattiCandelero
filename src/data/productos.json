@@ -1,6 +1,5 @@
 [
   {
-    "id": 1,
     "title": "Aceite de Coco",
     "description": "Aceite para hidratar la piel",
     "code": 101,
@@ -10,7 +9,6 @@
     "status": true
   },
   {
-    "id": 2,
     "title": "Cafetera Nespresso Vertuo Plus",
     "description": "Cafetera de cápsulas con sistema de preparación automática y ajuste de tamaño de taza",
     "code": 102,
@@ -20,7 +18,6 @@
     "status": true
   },
   {
-    "id": 3,
     "title": "Auriculares Sennheiser Momentum 4",
     "description": "Auriculares de diadema con cancelación de ruido y hasta 60 horas de autonomía",
     "code": 103,
@@ -30,7 +27,6 @@
     "status": true
   },
   {
-    "id": 4,
     "title": "Cámara GoPro HERO11",
     "description": "Cámara de acción 5.3K con estabilización avanzada",
     "code": 104,
@@ -40,7 +36,6 @@
     "status": true
   },
   {
-    "id": 5,
     "title": "Plancha Philips SteamGlide",
     "description": "Plancha de vapor con suela antiadherente y tecnología anti-goteo",
     "code": 105,
@@ -50,7 +45,6 @@
     "status": true
   },
   {
-    "id": 6,
     "title": "Colchón Memory Foam",
     "description": "Colchón ortopédico con tecnología de espuma viscoelástica",
     "code": 106,
@@ -60,7 +54,6 @@
     "status": true
   },
   {
-    "id": 7,
     "title": "Teclado Mecánico Logitech G Pro",
     "description": "Teclado mecánico RGB diseñado para gaming",
     "code": 107,
@@ -70,7 +63,6 @@
     "status": true
   },
   {
-    "id": 8,
     "title": "Cafetera Moka Italiana",
     "description": "Cafetera de aluminio para café espresso",
     "code": 108,
@@ -80,7 +72,6 @@
     "status": true
   },
   {
-    "id": 9,
     "title": "Zapatillas Running Nike Air Max",
     "description": "Zapatillas deportivas con amortiguación avanzada",
     "code": 109,
@@ -90,7 +81,6 @@
     "status": true
   },
   {
-    "id": 10,
     "title": "Set de Sartenes Tefal",
     "description": "Sartenes antiadherentes con revestimiento duradero",
     "code": 110,
@@ -100,7 +90,6 @@
     "status": true
   },
   {
-    "id": 11,
     "title": "Barra de Sonido Bose",
     "description": "Barra de sonido con Bluetooth y sonido envolvente",
     "code": 111,
@@ -110,7 +99,6 @@
     "status": true
   },
   {
-    "id": 12,
     "title": "Lámpara de Escritorio LED",
     "description": "Lámpara con ajuste de intensidad y carga inalámbrica",
     "code": 112,
@@ -120,7 +108,6 @@
     "status": true
   },
   {
-    "id": 13,
     "title": "Batidora de Mano Braun",
     "description": "Batidora de mano con accesorios intercambiables",
     "code": 113,
@@ -130,7 +117,6 @@
     "status": true
   },
   {
-    "id": 14,
     "title": "Parlante JBL Flip 6",
     "description": "Parlante portátil resistente al agua con Bluetooth",
     "code": 114,
@@ -140,7 +126,6 @@
     "status": true
   },
   {
-    "id": 15,
     "title": "Mochila Antirrobo Xiaomi",
     "description": "Mochila con compartimentos seguros y diseño moderno",
     "code": 115,
@@ -150,7 +135,6 @@
     "status": true
   },
   {
-    "id": 16,
     "title": "Reloj Inteligente Garmin",
     "description": "Reloj con GPS integrado y monitor de actividad",
     "code": 116,
@@ -160,7 +144,6 @@
     "status": true
   },
   {
-    "id": 17,
     "title": "Set de Brochas de Maquillaje",
     "description": "Juego de brochas sintéticas para maquillaje profesional",
     "code": 117,
@@ -170,7 +153,6 @@
     "status": true
   },
   {
-    "id": 18,
     "title": "Aspiradora Robótica Xiaomi",
     "description": "Aspiradora inteligente con mapeo láser",
     "code": 118,
@@ -180,7 +162,6 @@
     "status": true
   },
   {
-    "id": 19,
     "title": "Estación Meteorológica Digital",
     "description": "Monitor de clima con pantalla táctil y conexión Wi-Fi",
     "code": 119,
@@ -190,7 +171,6 @@
     "status": true
   },
   {
-    "id": 20,
     "title": "Juego de Cuchillos Zwilling",
     "description": "Juego de cuchillos de acero inoxidable de alta calidad",
     "code": 120,
@@ -200,7 +180,6 @@
     "status": true
   },
   {
-    "id": 21,
     "title": "Smart TV Samsung 55\"",
     "description": "Televisor 4K UHD con HDR y aplicaciones integradas",
     "code": 121,
@@ -210,7 +189,6 @@
     "status": true
   },
   {
-    "id": 22,
     "title": "Bicicleta Eléctrica Urban",
     "description": "Bicicleta plegable con asistencia eléctrica",
     "code": 122,
@@ -220,7 +198,6 @@
     "status": true
   },
   {
-    "id": 23,
     "title": "Robot de Cocina Thermomix",
     "description": "Robot multifunción con recetas guiadas",
     "code": 123,
@@ -230,7 +207,6 @@
     "status": true
   },
   {
-    "id": 24,
     "title": "Audífonos Sony WH-1000XM5",
     "description": "Audífonos inalámbricos con cancelación de ruido avanzada",
     "code": 124,
@@ -240,7 +216,6 @@
     "status": true
   },
   {
-    "id": 25,
     "title": "Cámara Canon EOS R6",
     "description": "Cámara profesional sin espejo con lente RF 24-105mm",
     "code": 125,
@@ -250,7 +225,6 @@
     "status": true
   },
   {
-    "id": 26,
     "title": "Reloj Inteligente Apple Watch Series 8",
     "description": "Smartwatch con sensor de temperatura y seguimiento de salud",
     "code": 126,
@@ -260,7 +234,6 @@
     "status": true
   },
   {
-    "id": 27,
     "title": "Silla Gamer DXRacer",
     "description": "Silla ergonómica con soporte lumbar ajustable",
     "code": 127,
@@ -270,7 +243,6 @@
     "status": true
   },
   {
-    "id": 28,
     "title": "Dron DJI Mini 3 Pro",
     "description": "Dron compacto con cámara 4K y seguimiento inteligente",
     "code": 128,
@@ -280,7 +252,6 @@
     "status": true
   },
   {
-    "id": 29,
     "title": "Set de Maletas Samsonite",
     "description": "Juego de 3 maletas rígidas con sistema de seguridad TSA",
     "code": 129,
@@ -290,7 +261,6 @@
     "status": true
   },
   {
-    "id": 30,
     "title": "Purificador de Aire Dyson",
     "description": "Purificador con filtro HEPA y control remoto",
     "code": 130,
@@ -300,7 +270,6 @@
     "status": true
   },
   {
-    "id": 31,
     "title": "Monitor LG UltraWide 34\"",
     "description": "Monitor IPS con resolución QHD y HDR10",
     "code": 131,
@@ -310,7 +279,6 @@
     "status": true
   },
   {
-    "id": 32,
     "title": "Cortadora de Césped Bosch",
     "description": "Cortadora eléctrica con ajuste de altura",
     "code": 132,
@@ -320,7 +288,6 @@
     "status": true
   },
   {
-    "id": 33,
     "title": "Cochecito de Bebé Chicco",
     "description": "Cochecito plegable con amortiguadores y capota",
     "code": 133,
@@ -330,7 +297,6 @@
     "status": true
   },
   {
-    "id": 34,
     "title": "Estación de Carga MagSafe",
     "description": "Cargador inalámbrico para iPhone y AirPods",
     "code": 134,
@@ -340,7 +306,6 @@
     "status": true
   },
   {
-    "id": 35,
     "title": "Cama para Mascotas Ortopédica",
     "description": "Cama acolchonada con espuma de memoria para mascotas",
     "code": 135,
@@ -350,7 +315,6 @@
     "status": true
   },
   {
-    "id": 36,
     "title": "Mochila Táctica Militar",
     "description": "Mochila resistente al agua con múltiples compartimentos",
     "code": 136,
@@ -360,7 +324,6 @@
     "status": true
   },
   {
-    "id": 37,
     "title": "Cámara de Seguridad Arlo Pro 4",
     "description": "Cámara inalámbrica con visión nocturna y detección de movimiento",
     "code": 137,
@@ -370,7 +333,6 @@
     "status": true
   },
   {
-    "id": 38,
     "title": "Micrófono Blue Yeti",
     "description": "Micrófono USB con calidad de estudio para streaming y podcast",
     "code": 138,
@@ -380,7 +342,6 @@
     "status": true
   },
   {
-    "id": 39,
     "title": "Kit de Pesas Ajustables Bowflex",
     "description": "Pesas con selector de peso de 2 a 24 kg",
     "code": 139,
@@ -390,7 +351,6 @@
     "status": true
   },
   {
-    "id": 40,
     "title": "Impresora Multifuncional HP",
     "description": "Impresora todo en uno con conexión Wi-Fi",
     "code": 140,

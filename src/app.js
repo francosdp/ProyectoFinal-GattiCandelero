@@ -38,7 +38,7 @@ const socketServer = new Server(httpServer)
 const productManager = new ProductManager()
 
 socketServer.on('connection', socket => {
-    console.log("Nuevo Cliente conectado")
+    console.log("Nuevo Cliente conectado en Socket.Io")
 
     socket.on("mensaje2", data => {
         console.log("Recibido", data)

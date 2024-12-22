@@ -1,25 +1,45 @@
-import express from 'express'
-import fs from 'fs/promises'
-import path from 'path'
-import ProductManager from '../services/ProductManager.js'
+import { Router } from 'express'
 import { productModel } from '../models/product.Model.js'
+import ProductManager from '../services/ProductManager.js'
 
-let products = []
-
-async function productsInDB() {
-    productsInDB = await productModel.find()
-    products = productsInDB.map(product=> product.toObject())
-    return products
-}
-productsInDB()
-
-
-const router = express.Router()
+const router = Router()
 const productManager = new ProductManager()
 
-
 router.get('/', async (req, res) => {
-    res.render('home', { products })
+    try {
+        let limit = parseInt(req.query.limit)
+        let page = parseInt(req.query.page)
+
+        let { category, order, stock } = req.query
+        let filter = {}
+        if (category) { filter.category = { $regex: category, $options: 'i' } }
+        if (stock) { filter.stock = parseInt(stock) }
+
+
+
+        let products = await productManager.getAllProducts(limit, page, filter, order)
+
+
+        let handleProds = products.docs
+
+
+        
+        handleProds.prevLink = products.hasPrevPage ? `http://localhost:8080/?page=${products.prevPage}` : null;
+        handleProds.nextLink = products.hasNextPage ? `http://localhost:8080/?page=${products.nextPage}` : null;
+
+
+
+
+
+        handleProds.isValid = !(page <= 0 || page > products.totalPages)
+
+        console.log(handleProds)
+        res.render('home', { handleProds })
+
+
+    } catch (error) {
+        console.log(error + " No se pudo realizar la operacion solicitada")
+    }
 })
 
 

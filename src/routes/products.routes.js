@@ -13,8 +13,17 @@ const productManager = new ProductManager()
 
 router.get('/', async (req, res) => {
     try {
-        const limit = req.query.limit ? parseInt(req.query.limit) : req.query.limit=10
-        const products = await productManager.getAllProducts(limit)
+        const limit = req.query.limit ? parseInt(req.query.limit) : 10
+        const page = req.query.page ? req.query.page : 1
+
+
+        const { category, price, title, order } = req.query
+        let filter = {}
+        if (category) { filter.category = category; }
+        if (price) { filter.price = { $lte: parseFloat(price) }; }
+        if (title) { filter.title = { $regex: title, $options: 'i' } }
+console.log(filter)
+        const products = await productManager.getAllProducts(limit, page, filter, order)
         res.json(products)
     }
     catch (error) {

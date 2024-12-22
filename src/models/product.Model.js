@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-
+import mongoose, { plugin } from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const productCollection="productos"
 
@@ -19,5 +19,6 @@ category:productIndexNeeded,
 status:Boolean
 }
 
+productSchema,plugin(mongoosePaginate)
 
 export const productModel = mongoose.model(productCollection,productSchema)

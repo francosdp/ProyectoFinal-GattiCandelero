@@ -16,12 +16,18 @@ export default class ProductManager {
 
 
 
-    async getAllProducts(limit) {
-        if (limit) {
-            this.products = await productModel.find().limit(limit)
+    async getAllProducts(limit, page, filter, order) {
+        let sort = {}
+        if (order === '1' || order === '-1') {
+            sort = { price: parseInt(order) };
+        } else if (order === '') {
+            sort = {}
+        }
+        if (filter) {
+            this.products = await productModel.paginate(filter, { limit: limit, page: page, sort: sort,lean:true })
             return this.products
         } else {
-            this.products = await productModel.find()
+            this.products = await productModel.paginate({}, { limit: limit, page: page, sort: sort, lean:true})
             return this.products
         }
     }

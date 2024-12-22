@@ -1,11 +1,17 @@
+{{#if handleProds.isValid}}
 <div>
-    {{#each products}}
+  {{#each handleProds}}
     <div>
-        <h4>{{title}}</h4>
-        <p>{{this.price}}</p>
-        <p>{{this.id}}</p>
+      <h4>{{this.title}}</h4>
+      <p>Precio: {{this.price}}</p>
+      <p>Stock Disponible: {{this.stock}}</p>
+      <p>Categoria: {{this.category}}</p>
     </div>
-    {{/each}}
+  {{/each}}
 </div>
+{{else}}
+<p>No hay productos disponibles</p>
+{{/if}}
+
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/index.js"></script>

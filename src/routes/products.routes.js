@@ -23,6 +23,9 @@ router.get('/', async (req, res) => {
         if (price) { filter.price = { $lte: parseFloat(price) }; }
         if (title) { filter.title = { $regex: title, $options: 'i' } }
         const products = await productManager.getAllProducts(limit, page, filter, order)
+
+
+
         const handleProds = products.docs
         handleProds.isValid = !(page <= 0 || page > products.totalPages)
 

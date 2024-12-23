@@ -1,14 +1,15 @@
 import { Router } from 'express'
 import { productModel } from '../models/product.Model.js'
 import ProductManager from '../services/ProductManager.js'
+import { paginate } from 'mongoose-paginate-v2'
 
 const router = Router()
 const productManager = new ProductManager()
 
 router.get('/', async (req, res) => {
     try {
-        let limit = parseInt(req.query.limit)
-        let page = parseInt(req.query.page)
+        let limite = parseInt(req.query.limit)
+        let pagina = parseInt(req.query.page)
 
         let { category, order, stock } = req.query
         let filter = {}
@@ -17,15 +18,29 @@ router.get('/', async (req, res) => {
 
 
 
-        let products = await productManager.getAllProducts(limit, page, filter, order)
+        let products = await productManager.getAllProducts(limite, pagina, filter, order)
 
+        const { payload, totalPages, hasPrevPage,page, hasNextPage, prevPage, nextPage } = products
+
+
+        const paginateInfo = {status:String,payload,totalPages,prevPage, nextPage, page, hasPrevPage, hasNextPage}
+
+        if(!products.docs){
+            paginateInfo.status="error"
+        }else{
+            paginateInfo.status="success"
+        }
+
+        paginateInfo.payload=products.docs
+
+
+        paginateInfo.prevLink = paginateInfo.hasPrevPage ? `http://localhost:8080/?page=${paginateInfo.prevPage}` : null;
+        paginateInfo.nextLink = paginateInfo.hasNextPage ? `http://localhost:8080/?page=${paginateInfo.nextPage}` : null;
+
+
+        console.log(paginateInfo)
 
         let handleProds = products.docs
-
-
-        
-        handleProds.prevLink = products.hasPrevPage ? `http://localhost:8080/?page=${products.prevPage}` : null;
-        handleProds.nextLink = products.hasNextPage ? `http://localhost:8080/?page=${products.nextPage}` : null;
 
 
 
@@ -33,7 +48,6 @@ router.get('/', async (req, res) => {
 
         handleProds.isValid = !(page <= 0 || page > products.totalPages)
 
-        console.log(handleProds)
         res.render('home', { handleProds })
 
 

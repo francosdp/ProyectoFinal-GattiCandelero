@@ -23,12 +23,17 @@ export default class ProductManager {
         } else if (order === '') {
             sort = {}
         }
+        
         if (filter) {
-            this.products = await productModel.paginate(filter, { limit: limit, page: page, sort: sort,lean:true })
-            return this.products
+            let products = await productModel.paginate(filter, { limit: limit, page: page, sort: sort,lean:true })
+            if (products.docs.length<1){
+                return
+            }else{
+                return products 
+            }
         } else {
-            this.products = await productModel.paginate({}, { limit: limit, page: page, sort: sort, lean:true})
-            return this.products
+            let products = await productModel.paginate({}, { limit: limit, page: page, sort: sort, lean:true})
+            return products
         }
     }
 

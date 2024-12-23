@@ -1,10 +1,11 @@
 <div>
+  <h1>Tu carrito</h1>
   {{#each cart}}
     <div>
       
       <h4>{{this.product.title}}</h4>
-      <p>{{this.product.price}}</p>
-      <p>{{this.quantity}}</p>
+      <p>Precio por unidad: {{this.product.price}}</p>
+      <p>Unidades: {{this.quantity}}</p>
 
       
     </div>

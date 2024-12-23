@@ -25,7 +25,6 @@ router.get('/', async (req, res) => {
         const products = await productManager.getAllProducts(limit, page, filter, order)
 
 
-
         const handleProds = products.docs
         handleProds.isValid = !(page <= 0 || page > products.totalPages)
 
@@ -57,8 +56,8 @@ router.get('/:pid', async (req, res) => {
         const productId = (req.params.pid);
         console.log(productId)
         const product = await productManager.getProductById(productId);
-
-        res.json(product);
+        console.log(product)
+        res.render('productInfo', {product});
 
         if (!product) {
             return res.status(404).send("Producto no encontrado")

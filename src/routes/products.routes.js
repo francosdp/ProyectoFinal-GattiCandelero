@@ -56,12 +56,11 @@ router.get('/:pid', async (req, res) => {
         const productId = (req.params.pid);
         console.log(productId)
         const product = await productManager.getProductById(productId);
-        console.log(product)
-        res.render('productInfo', {product});
-
-        if (!product) {
+        
+        if (product.length===0) {
             return res.status(404).send("Producto no encontrado")
         }
+        res.render('productInfo', {product});
     } catch (error) {
         console.log(error)
     }

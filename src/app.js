@@ -31,59 +31,8 @@ connetcMongoDB()
 
 
 
-const httpServer = app.listen(PORT, () => { console.log('Servidor socket.io corriendo en ' + PORT) });
-const socketServer = new Server(httpServer)
-
-
-const productManager = new ProductManager()
-
-socketServer.on('connection', socket => {
-    console.log("Nuevo Cliente conectado en Socket.Io")
-
-    socket.on("mensaje2", data => {
-        console.log("Recibido", data)
-    })
-    socket.on("formulario", data => {
-        if (!data.title || !data.description || !data.code || !data.price || !data.stock || !data.category) {
-            socket.emit('error', { error: "Todos los campos son obligatorios" });
-            return;
-        }
-        productManager.addProduct(data)
-            .then(() => {
-                socket.emit(`success`, { message: "Producto Agregado Correctamente" })
-                let products = productManager.products
-                socket.emit('productos', products)
-            })
-            .catch(error => {
-                socket.emit('error', { error: "Error al agregar producto" })
-            })
-    })
-    socket.on('eliminar', (data) => {
-        if (!data) {
-            socket.emit('error', { error: "El campo es obligatorio " });
-            return;
-        }
-        let products = productManager.products
-
-        const productFound = products.findIndex(product => product.id === data)
-        console.log(productFound)
-        if (productFound<0) {
-            socket.emit('notDeleted', { error: "Producto no encontrado" })
-        } else {
-            const deletedProduct = products.splice(productFound,1)
-            socket.emit('deleted', { message: "El producto se ha eliminado" })
-            productManager.saveFile()
-            products = productManager.products
-            socket.emit('productos', products)
-        }
-
-
-
-
-
-    })
-
-
+app.listen(PORT, () => {
+    console.log(`Server run on port: ${PORT}`);
 })
 
 

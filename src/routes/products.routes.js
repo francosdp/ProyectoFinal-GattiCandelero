@@ -22,9 +22,12 @@ router.get('/', async (req, res) => {
         if (category) { filter.category = category; }
         if (price) { filter.price = { $lte: parseFloat(price) }; }
         if (title) { filter.title = { $regex: title, $options: 'i' } }
-console.log(filter)
+
+
         const products = await productManager.getAllProducts(limit, page, filter, order)
-        res.json(products)
+        const handleProds =products.docs
+    
+        res.render('index', {handleProds})
     }
     catch (error) {
         console.log(error)

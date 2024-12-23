@@ -39,9 +39,9 @@ router.get('/:cid', async (req, res) => {
         if (!cartFound) {
             return res.status(404).send("Carrito no encontrado")
 
-        } else {
-            res.json(cartFound)
         }
+        console.log(cartFound.products)
+        res.render('carts', cartFound.products)
     } catch (error) {
         console.log(error)
     }

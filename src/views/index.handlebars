@@ -1,5 +1,12 @@
 <div>
-    <h1>¡Hola Bienvenido!</h1>
+  {{#each handleProds}}
+    <div>
+      <h4>{{this.title}}</h4>
+      <p>Precio: {{this.price}}</p>
+      <p>Stock Disponible: {{this.stock}}</p>
+      <p>Categoria: {{this.category}}</p>
+    </div>
+  {{/each}}
 </div>
 
 <script src="/socket.io/socket.io.js"></script>

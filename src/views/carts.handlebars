@@ -1,11 +1,13 @@
 <div>
-  {{#each cartFound.product}}
+  {{#each cart}}
     <div>
-      <h4>1{{this.product.title}}</h4>
-      <p>2{{this.product.price}}</p>
-      <p>3{{this.quantity}}</p>
+      
+      <h4>{{this.product.title}}</h4>
+      <p>{{this.product.price}}</p>
+      <p>{{this.quantity}}</p>
+
+      
     </div>
-
   {{/each}}
-
+ 
 </div>

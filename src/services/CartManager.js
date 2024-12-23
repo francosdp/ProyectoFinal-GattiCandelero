@@ -24,7 +24,7 @@ export default class CartManager {
     }
 
     async findCart(id) {
-        const foundCart = await cartModel.find({ _id: id }).populate('products.product')
+        const foundCart = await cartModel.findById({ _id: id }, { lean: true }).populate('products.product')
         if (!foundCart) {
             return null
         }
@@ -118,7 +118,26 @@ export default class CartManager {
         }
     }
 
+    async getCartForViews(id) {
+        try {
+            const foundCart = await cartModel.findById({ _id: id }, {})
+                .populate('products.product')
+                .lean()
 
+
+            const products = foundCart.products.map(item => ({
+                product: item.product,
+                quantity: item.quantity
+            }));
+
+
+            return products
+
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
 
 

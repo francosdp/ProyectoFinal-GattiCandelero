@@ -1,5 +1,6 @@
 import { Router } from "express";
 import CartManager from "../services/CartManager.js"
+import { cartModel } from "../models/cart.Model.js";
 
 
 
@@ -34,17 +35,15 @@ router.post('/', async (req, res) => {
 
 router.get('/:cid', async (req, res) => {
     try {
-        const cartId = (req.params.cid);
-        const cartFound = await cartManager.findCart(cartId)
-        if (!cartFound) {
-            return res.status(404).send("Carrito no encontrado")
-
-        }
-        console.log(cartFound.products)
-        res.render('carts', cartFound.products)
+        const cartId = (req.params.cid)
+        let cart = await cartManager.getCartForViews(cartId)
+        
+        res.render('carts', {cart})
     } catch (error) {
         console.log(error)
     }
+
+
 })
 
 
@@ -107,6 +106,8 @@ router.delete('/:cid', async (req, res) => {
 
 
 })
+
+
 
 
 

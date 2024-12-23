@@ -25,6 +25,7 @@ export default class CartManager {
 
     async findCart(id) {
         const foundCart = await cartModel.find({ _id: id })
+        .populate('products.product')
         if (!foundCart) {
             return null
         }
@@ -40,13 +41,10 @@ export default class CartManager {
 
             const addProduct = {
                 product: {
-                    _id: findProduct._id,
-                    title: findProduct.title,
-                    price: findProduct.price,
-                    quantity: amount
-                }
+                    _id: findProduct._id
+                },
+                quantity: amount
             }
-            console.log(addProduct._id)
 
             if (amount > addProduct.stock) {
                 return console.log("Error: No hay suficientes unidades disponibles");
@@ -58,11 +56,11 @@ export default class CartManager {
                 return console.log("Error: El id no corresponde a un carrito existente")
             }
 
-            const existingProductIndex = foundCart.products.findIndex(item => item.product.title === addProduct.product.title);
+            const existingProductIndex = foundCart.products.findIndex(item => item.product.toString() === productId);
 
             if (existingProductIndex !== -1) {
 
-                foundCart.products[existingProductIndex].product.quantity += amount;
+                foundCart.products[existingProductIndex].quantity += amount;
             } else {
                 foundCart.products.push(addProduct);
             }
@@ -88,7 +86,7 @@ export default class CartManager {
                 return console.log("Error: El id no corresponde a un producto disponible")
             }
 
-            const existingProduct = foundCart.products.findIndex(item => item.product._id.toString() === productId);
+            const existingProduct = foundCart.products.findIndex(item => item.product.toString() === productId);
 
             if (existingProduct !== 1) {
                 foundCart.products.splice(existingProduct, 1);
@@ -112,7 +110,7 @@ export default class CartManager {
             if (!foundCart) {
                 return console.log("Error: El id no corresponde a un carrito existente")
             } else {
-                foundCart.products=[]
+                foundCart.products = []
             }
             await foundCart.save()
             return foundCart

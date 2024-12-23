@@ -18,6 +18,6 @@ const productSchema = new mongoose.Schema({
     status: Boolean
 })
 
-productSchema, plugin(mongoosePaginate)
+productSchema.plugin(mongoosePaginate)
 
-export const productModel = mongoose.model(productCollection, productSchema)
+export const productModel = mongoose.model('Product', productSchema,productCollection)

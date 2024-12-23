@@ -48,7 +48,6 @@ router.post('/', async (req, res) => {
 
 router.get('/:pid', async (req, res) => {
     try {
-        console.log("Holaaa")
         const productId = (req.params.pid);
         console.log(productId)
         const product = await productManager.getProductById(productId);

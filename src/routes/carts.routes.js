@@ -2,7 +2,6 @@ import { Router } from "express";
 import CartManager from "../services/CartManager.js"
 
 
-
 const router = Router()
 const cartManager = new CartManager()
 
@@ -10,7 +9,14 @@ const cartManager = new CartManager()
 
 
 
-
+router.get('/', async (req, res) => {
+    try {
+        const carts = await cartManager.getAllCarts()
+        res.json(carts)
+    } catch (error) {
+        console.log(error + " No pudo realizarse la busqueda")
+    }
+})
 
 router.post('/', async (req, res) => {
     try {
@@ -18,7 +24,6 @@ router.post('/', async (req, res) => {
         const newCart = await cartManager.addCart()
 
         res.status(201).json({
-            newCart: newCart,
             carts: carts
         })
     } catch (error) {
@@ -28,13 +33,13 @@ router.post('/', async (req, res) => {
 
 router.get('/:cid', async (req, res) => {
     try {
-        const cartId = parseInt(req.params.cid);
-        const cartFoundProducts = await cartManager.findCart(cartId)
-        if (!cartFoundProducts) {
+        const cartId = (req.params.cid);
+        const cartFound = await cartManager.findCart(cartId)
+        if (!cartFound) {
             return res.status(404).send("Carrito no encontrado")
 
         } else {
-            res.json(cartFoundProducts)
+            res.json(cartFound)
         }
     } catch (error) {
         console.log(error)
@@ -51,12 +56,17 @@ router.get('/:cid', async (req, res) => {
 router.post('/:cid/product/:pid', async (req, res) => {
 
     try {
-        const cartId = parseInt(req.params.cid)
-        const productId = parseInt(req.params.pid)
+
+
+        const cartId = (req.params.cid)
+        const productId = (req.params.pid)
         const quantity = parseInt(req.body.quantity)
+
+
         const selectedCart = await cartManager.addProduct(cartId, productId, quantity)
 
-        res.status(201).json(selectedCart)
+
+        res.send(selectedCart)
 
     } catch (error) {
         console.log(error)
@@ -65,6 +75,38 @@ router.post('/:cid/product/:pid', async (req, res) => {
 
 
 })
+
+router.delete('/:cid/product/:pid', async (req, res) => {
+    try {
+
+        const cartId = (req.params.cid)
+        const productId = (req.params.pid)
+
+        const deleteProduct = await cartManager.deleteProduct(cartId, productId)
+        res.send(deleteProduct)
+
+
+    } catch (error) {
+        console.log(error)
+    }
+
+
+})
+
+router.delete('/:cid', async (req, res) => {
+    try {
+
+        const cartId = (req.params.cid)
+        const deleteCart = await cartManager.deleteAllCart(cartId)
+        res.send(deleteCart)
+
+    } catch (error) {
+        console.log(error)
+    }
+
+
+})
+
 
 
 export default router;

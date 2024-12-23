@@ -108,7 +108,7 @@ app.use(express.static(__dirname + '/public'))
 
 app.use('/', viewsRouter)
 app.use('/products', productRouter)
-app.use('/api/carts', cartRouter)
+app.use('/carts', cartRouter)
 
 
 

@@ -1,99 +1,130 @@
-import { readFile } from 'fs/promises';
-import fs from 'fs/promises'
-import path from 'path'
-
-const cartsFilePath = path.resolve('data', 'carritos.json')
-
-const productsFilePath = path.join('data', 'productos.json')
-
-
+import { cartModel } from "../models/cart.Model.js"
+import { productModel } from "../models/product.Model.js"
 
 export default class CartManager {
-
-
-    async readProducts() {
-        try {
-            const data = await readFile(productsFilePath, 'utf-8')
-            const products = JSON.parse(data)
-            return products
-        } catch (error) {
-            console.log(error)
-        }
-
-    }
-
-    async saveFile() {
-        const jsonData = JSON.stringify(this.carts, null, 2);
-        await fs.writeFile(cartsFilePath, jsonData)
-    }
 
 
 
     constructor() {
         this.carts = []
-        this.init()
-    }
-    async init() {
-        try {
-            const data = await fs.readFile(cartsFilePath, 'utf-8')
-            this.carts = JSON.parse(data)
-        } catch (error) {
-            this.carts = []
-        }
     }
 
     async getAllCarts() {
+        this.carts = await cartModel.find()
         return this.carts
     }
 
 
 
     async addCart() {
-        const newCart = {
-            id: this.carts.length ? this.carts[this.carts.length - 1].id + 1 : 1,
+        const newCart = await cartModel.create({
             products: []
-        }
-        this.carts.push(newCart)
-        this.saveFile()
+        })
         return newCart
     }
 
     async findCart(id) {
-        const foundCart = this.carts.find(cart => cart.id === id)
-        console.log(foundCart)
+        const foundCart = await cartModel.find({ _id: id })
         if (!foundCart) {
             return null
         }
-        return foundCart.products
+        return foundCart
     }
 
-    async addProduct(id, productId, amount) {
-        const products = await this.readProducts()
+    async addProduct(cartId, productId, amount) {
+        try {
+            const findProduct = await productModel.findOne({ _id: productId })
+            if (!findProduct) {
+                return console.log("Error: El id no corresponde a un producto disponible")
+            }
 
-        const foundCart = this.carts.find(cart => cart.id === id)
-        const findProduct = await products.find(product => product.id === productId)
-            const existingProduct = foundCart.products.find(product => product.product === findProduct.id)
-
-            if (!existingProduct) {
-                const newProduct = {
-                    product: findProduct.id,
+            const addProduct = {
+                product: {
+                    _id: findProduct._id,
+                    title: findProduct.title,
+                    price: findProduct.price,
                     quantity: amount
                 }
-                foundCart.products.push(newProduct)
-            } else {
-                const toBeUpdatedProduct = foundCart.products.findIndex(product => product.product === existingProduct.product)
-                const updatedProduct = {
-                    product: findProduct.id,
-                    quantity: existingProduct.quantity + amount
-                }
-
-                foundCart.products[toBeUpdatedProduct] = updatedProduct
-                
             }
-        
+            console.log(addProduct._id)
 
-        this.saveFile()
-        return foundCart
+            if (amount > addProduct.stock) {
+                return console.log("Error: No hay suficientes unidades disponibles");
+            }
 
+
+            const foundCart = await cartModel.findOne({ _id: cartId })
+            if (!foundCart) {
+                return console.log("Error: El id no corresponde a un carrito existente")
+            }
+
+            const existingProductIndex = foundCart.products.findIndex(item => item.product.title === addProduct.product.title);
+
+            if (existingProductIndex !== -1) {
+
+                foundCart.products[existingProductIndex].product.quantity += amount;
+            } else {
+                foundCart.products.push(addProduct);
+            }
+            await foundCart.save()
+            return foundCart
+
+        } catch (error) {
+            console.error(error.message || error);
+            throw error;
+        }
     }
+
+    async deleteProduct(cartId, productId) {
+
+        try {
+
+            const foundCart = await cartModel.findOne({ _id: cartId })
+            if (!foundCart) {
+                return console.log("Error: El id no corresponde a un carrito existente")
+            }
+            const foundProduct = await productModel.findOne({ _id: productId })
+            if (!foundProduct) {
+                return console.log("Error: El id no corresponde a un producto disponible")
+            }
+
+            const existingProduct = foundCart.products.findIndex(item => item.product._id.toString() === productId);
+
+            if (existingProduct !== 1) {
+                foundCart.products.splice(existingProduct, 1);
+                foundCart.save()
+
+            } else {
+                console.log("No se pudo eliminar el producto")
+            }
+
+            return foundCart
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+    async deleteAllCart(cartId) {
+        try {
+            let foundCart = await cartModel.findOne({ _id: cartId })
+            if (!foundCart) {
+                return console.log("Error: El id no corresponde a un carrito existente")
+            } else {
+                foundCart.products=[]
+            }
+            await foundCart.save()
+            return foundCart
+        } catch (error) {
+            console.log(error + " No se pudo eliminar el carrito ")
+        }
+    }
+
+
+
+
+
 }
+
+
